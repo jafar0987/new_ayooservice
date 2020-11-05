@@ -2,29 +2,33 @@
 
 @section('title', __('User Management'))
 
-@section('breadcrumb-links')
-    @include('backend.auth.user.includes.breadcrumb-links')
+@section('page-header')
+    <x-backend.page-header>
+        <x-slot name="title">User Management</x-slot>
+        <x-slot name="menu">Access</x-slot>
+        <x-slot name="menuLink">#</x-slot>
+        <x-slot name="menuItem">User Management</x-slot>
+        <x-slot name="menuItemLink">#</x-slot>
+        <x-slot name="link">
+            <x-utils.link
+                iconFa="fa fa-plus"
+                class="btn btn-info"
+                :href="route('admin.auth.user.create')"
+                :text="__('Create User')"
+            />
+            @include('backend.auth.user.includes.breadcrumb-links')
+        </x-slot>
+    </x-backend.page-header>
 @endsection
 
 @section('content')
     <x-backend.card>
         <x-slot name="header">
-            @lang('User Management')
+            @lang('Active User')
         </x-slot>
 
-        @if ($logged_in_user->hasAllAccess())
-            <x-slot name="headerActions">
-                <x-utils.link
-                    icon="c-icon cil-plus"
-                    class="card-header-action"
-                    :href="route('admin.auth.user.create')"
-                    :text="__('Create User')"
-                />
-            </x-slot>
-        @endif
-
         <x-slot name="body">
-            <livewire:backend.users-table />
+            <livewire:users-table/>
         </x-slot>
     </x-backend.card>
 @endsection

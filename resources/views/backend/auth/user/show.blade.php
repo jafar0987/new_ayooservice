@@ -2,14 +2,25 @@
 
 @section('title', __('View User'))
 
+@section('page-header')
+    <x-backend.page-header>
+        <x-slot name="title">Edit User</x-slot>
+        <x-slot name="menu">Access</x-slot>
+        <x-slot name="menuLink">#</x-slot>
+        <x-slot name="menuItem">User Management</x-slot>
+        <x-slot name="menuItemLink">{{ url('/admin/auth/user') }}</x-slot>
+        <x-slot name="menuItem2">Show User : {{$user->id}}</x-slot>
+        <x-slot name="menuItemLink2">#</x-slot>
+        <x-slot name="link">
+            <x-utils.link class="btn btn-secondary" :href="route('admin.auth.user.index')" :text="__('Back')"/>
+        </x-slot>
+    </x-backend.page-header>
+@endsection
+
 @section('content')
     <x-backend.card>
         <x-slot name="header">
             @lang('View User')
-        </x-slot>
-
-        <x-slot name="headerActions">
-            <x-utils.link class="card-header-action" :href="route('admin.auth.user.index')" :text="__('Back')" />
         </x-slot>
 
         <x-slot name="body">
@@ -21,7 +32,7 @@
 
                 <tr>
                     <th>@lang('Avatar')</th>
-                    <td><img src="{{ $user->avatar }}" class="user-profile-image" /></td>
+                    <td><img src="{{ $user->avatar }}" class="user-profile-image"/></td>
                 </tr>
 
                 <tr>
@@ -91,11 +102,14 @@
 
         <x-slot name="footer">
             <small class="float-right text-muted">
-                <strong>@lang('Account Created'):</strong> @displayDate($user->created_at) ({{ $user->created_at->diffForHumans() }}),
-                <strong>@lang('Last Updated'):</strong> @displayDate($user->updated_at) ({{ $user->updated_at->diffForHumans() }})
+                <strong>@lang('Account Created'):</strong> @displayDate($user->created_at)
+                ({{ $user->created_at->diffForHumans() }}),
+                <strong>@lang('Last Updated'):</strong> @displayDate($user->updated_at)
+                ({{ $user->updated_at->diffForHumans() }})
 
                 @if($user->trashed())
-                    <strong>@lang('Account Deleted'):</strong> @displayDate($user->deleted_at) ({{ $user->deleted_at->diffForHumans() }})
+                    <strong>@lang('Account Deleted'):</strong> @displayDate($user->deleted_at)
+                    ({{ $user->deleted_at->diffForHumans() }})
                 @endif
             </small>
         </x-slot>

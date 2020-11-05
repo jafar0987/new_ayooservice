@@ -13,7 +13,7 @@
             <ul class="navbar-nav ml-auto">
                 @if(config('boilerplate.locale.status') && count(config('boilerplate.locale.languages')) > 1)
                     <li class="nav-item dropdown">
-                        <x-utils.link
+                        <x-utils.link-fe
                             :text="__(getLocaleName(app()->getLocale()))"
                             class="nav-link dropdown-toggle"
                             id="navbarDropdownLanguageLink"
@@ -27,7 +27,7 @@
 
                 @guest
                     <li class="nav-item">
-                        <x-utils.link
+                        <x-utils.link-fe
                             :href="route('frontend.auth.login')"
                             :active="activeClass(Route::is('frontend.auth.login'))"
                             :text="__('Login')"
@@ -36,7 +36,7 @@
 
                     @if (config('boilerplate.access.user.registration'))
                         <li class="nav-item">
-                            <x-utils.link
+                            <x-utils.link-fe
                                 :href="route('frontend.auth.register')"
                                 :active="activeClass(Route::is('frontend.auth.register'))"
                                 :text="__('Register')"
@@ -46,7 +46,7 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <x-utils.link
+                        <x-utils.link-fe
                             href="#"
                             id="navbarDropdown"
                             class="nav-link dropdown-toggle"
@@ -60,31 +60,31 @@
                                 <img class="rounded-circle" style="max-height: 20px" src="{{ $logged_in_user->avatar }}" />
                                 {{ $logged_in_user->name }} <span class="caret"></span>
                             </x-slot>
-                        </x-utils.link>
+                        </x-utils.link-fe>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             @if ($logged_in_user->isAdmin())
-                                <x-utils.link
+                                <x-utils.link-fe
                                     :href="route('admin.dashboard')"
                                     :text="__('Administration')"
                                     class="dropdown-item" />
                             @endif
 
                             @if ($logged_in_user->isUser())
-                                <x-utils.link
+                                <x-utils.link-fe
                                     :href="route('frontend.user.dashboard')"
                                     :active="activeClass(Route::is('frontend.user.dashboard'))"
                                     :text="__('Dashboard')"
                                     class="dropdown-item"/>
                             @endif
 
-                            <x-utils.link
+                            <x-utils.link-fe
                                 :href="route('frontend.user.account')"
                                 :active="activeClass(Route::is('frontend.user.account'))"
                                 :text="__('My Account')"
                                 class="dropdown-item" />
 
-                            <x-utils.link
+                            <x-utils.link-fe
                                 :text="__('Logout')"
                                 class="dropdown-item"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -92,7 +92,7 @@
                                     @lang('Logout')
                                     <x-forms.post :action="route('frontend.auth.logout')" id="logout-form" class="d-none" />
                                 </x-slot>
-                            </x-utils.link>
+                            </x-utils.link-fe>
                         </div>
                     </li>
                 @endguest

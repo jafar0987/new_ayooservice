@@ -30,7 +30,7 @@
         <main>
             @yield('content')
         </main>
-    </div><!--app-->
+    </div>
 
     @stack('before-scripts')
     <script src="{{ mix('js/manifest.js') }}"></script>

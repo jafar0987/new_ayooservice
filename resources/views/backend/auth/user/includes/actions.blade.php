@@ -3,7 +3,7 @@
         :action="route('admin.auth.user.restore', $user)"
         method="patch"
         button-class="btn btn-info btn-sm"
-        icon="fas fa-sync-alt"
+        icon="fa fa-sync-alt"
         name="confirm-item"
     >
         @lang('Restore')
@@ -25,7 +25,7 @@
             :action="route('admin.auth.user.mark', [$user, 1])"
             method="patch"
             button-class="btn btn-primary btn-sm"
-            icon="fas fa-sync-alt"
+            icon="fa fa-sync-alt"
             name="confirm-item"
             permission="admin.access.user.reactivate"
         >

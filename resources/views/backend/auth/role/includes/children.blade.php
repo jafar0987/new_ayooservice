@@ -1,12 +1,14 @@
-<ul class="list-unstyled ml-4">
+<label class="custom-control custom-checkbox">
     @foreach($children as $permission)
-        <li>
-            <input type="checkbox" name="permissions[]" {{ in_array($permission->id, $usedPermissions ?? [], true) ? 'checked' : '' }} value="{{ $permission->id }}" id="{{ $permission->id }}" />
-            <label for="{{ $permission->id }}">{{ $permission->description ?? $permission->name }}</label>
+        <label class="custom-control custom-checkbox" id="{{ $permission->id }}">
+            <input type="checkbox" class="custom-control-input" name="permissions[]"
+                   value="{{ $permission->id }}"
+                   id="{{ $permission->id }}" {{ in_array($permission->id, $usedPermissions ?? [], true) ? 'checked' : '' }} >
+            <span class="custom-control-label">{{ $permission->description ?? $permission->name }}</span>
+        </label>
 
-            @if($permission->children->count())
-                @include('backend.auth.role.includes.children', ['children' => $permission->children])
-            @endif
-        </li>
+        @if($permission->children->count())
+            @include('backend.auth.role.includes.children', ['children' => $permission->children])
+        @endif
     @endforeach
-</ul>
+</label>

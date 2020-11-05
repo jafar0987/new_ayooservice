@@ -8,6 +8,7 @@ use App\Domains\Auth\Models\Traits\Relationship\UserRelationship;
 use App\Domains\Auth\Models\Traits\Scope\UserScope;
 use App\Domains\Auth\Notifications\Frontend\ResetPasswordNotification;
 use App\Domains\Auth\Notifications\Frontend\VerifyEmail;
+use App\Models\Traits\CrudTraits;
 use DarkGhostHunter\Laraguard\Contracts\TwoFactorAuthenticatable;
 use DarkGhostHunter\Laraguard\TwoFactorAuthentication;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -32,7 +34,9 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
         UserAttribute,
         UserMethod,
         UserRelationship,
-        UserScope;
+        UserScope,
+        HasApiTokens,
+        CrudTraits;
 
     public const TYPE_ADMIN = 'admin';
     public const TYPE_USER = 'user';
@@ -83,10 +87,10 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
      * @var array
      */
     protected $casts = [
-        'active' => 'boolean',
-        'last_login_at' => 'datetime',
+        'active'            => 'boolean',
+        'last_login_at'     => 'datetime',
         'email_verified_at' => 'datetime',
-        'to_be_logged_out' => 'boolean',
+        'to_be_logged_out'  => 'boolean',
     ];
 
     /**
@@ -107,7 +111,7 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
     public function sendPasswordResetNotification($token): void
@@ -142,6 +146,6 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
      */
     public function canBeImpersonated(): bool
     {
-        return ! $this->isMasterAdmin();
+        return !$this->isMasterAdmin();
     }
 }

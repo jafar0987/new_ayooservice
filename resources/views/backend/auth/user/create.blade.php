@@ -4,15 +4,26 @@
 
 @section('title', __('Create User'))
 
+@section('page-header')
+    <x-backend.page-header>
+        <x-slot name="title">Create User</x-slot>
+        <x-slot name="menu">Access</x-slot>
+        <x-slot name="menuLink">#</x-slot>
+        <x-slot name="menuItem">User Management</x-slot>
+        <x-slot name="menuItemLink">{{ url('/admin/auth/user') }}</x-slot>
+        <x-slot name="menuItem2">Create User</x-slot>
+        <x-slot name="menuItemLink2">#</x-slot>
+        <x-slot name="link">
+            <x-utils.link class="btn btn-secondary" :href="route('admin.auth.user.index')" :text="__('Cancel')" />
+        </x-slot>
+    </x-backend.page-header>
+@endsection
+
 @section('content')
     <x-forms.post :action="route('admin.auth.user.store')">
         <x-backend.card>
             <x-slot name="header">
                 @lang('Create User')
-            </x-slot>
-
-            <x-slot name="headerActions">
-                <x-utils.link class="card-header-action" :href="route('admin.auth.user.index')" :text="__('Cancel')" />
             </x-slot>
 
             <x-slot name="body">
@@ -116,7 +127,7 @@
             </x-slot>
 
             <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Create User')</button>
+                <button class="btn btn-primary float-right" type="submit">@lang('Create User')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.post>

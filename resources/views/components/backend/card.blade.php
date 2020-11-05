@@ -1,13 +1,18 @@
+@if (isset($headerActions))
+
+            {{ $headerActions }}
+    <div class="clearfix"></div>
+    </br>
+
+@endif
 <div class="card">
     @if (isset($header))
-        <div class="card-header">
-            {{ $header }}
 
-            @if (isset($headerActions))
-                <div class="card-header-actions">
-                    {{ $headerActions }}
-                </div><!--card-header-actions-->
-            @endif
+        <div class="card-header">
+            <h3 class="card-title">
+                {{ $header }}
+            </h3>
+
         </div><!--card-header-->
     @endif
 

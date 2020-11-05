@@ -5,7 +5,9 @@
         <div class="col">
             @foreach($general->where('type', $type) as $permission)
                 <span class="d-block">
-                        <input type="checkbox" name="permissions[]" {{ in_array($permission->id, $usedPermissions ?? [], true) ? 'checked' : '' }} value="{{ $permission->id }}" id="{{ $permission->id }}" />
+                        <input type="checkbox" name="permissions[]"
+                               {{ in_array($permission->id, $usedPermissions ?? [], true) ? 'checked' : '' }} value="{{ $permission->id }}"
+                               id="{{ $permission->id }}"/>
                         <label for="{{ $permission->id }}">{{ $permission->description ?? $permission->name }}</label>
                     </span>
             @endforeach
@@ -18,20 +20,23 @@
 @endif
 
 @if ($categories->where('type', $type)->count())
-    <h5 class="mb-3">@lang('Permission Categories')</h5>
-
-    <ul id="tree" class="m-0 p-0 list-unstyled">
+    <div class="form-label">@lang('Permission Categories')</div>
+    <div class="custom-controls-stacked">
         @foreach($categories->where('type', $type) as $permission)
-            <li>
-                <input type="checkbox" name="permissions[]" {{ in_array($permission->id, $usedPermissions ?? [], true) ? 'checked' : '' }} value="{{ $permission->id }}" id="{{ $permission->id }}" />
-                <label for="{{ $permission->id }}">{{ $permission->description ?? $permission->name }}</label>
+            <label class="custom-control custom-checkbox" id="{{ $permission->id }}">
+                <input type="checkbox" class="custom-control-input" name="permissions[]"
+                       value="{{ $permission->id }}"
+                       id="{{ $permission->id }}" {{ in_array($permission->id, $usedPermissions ?? [], true) ? 'checked' : '' }} >
+                <span class="custom-control-label">{{ $permission->description ?? $permission->name }}</span>
+            </label>
 
-                @if($permission->children->count())
-                    @include('backend.auth.role.includes.children', ['children' => $permission->children])
-                @endif
-            </li>
+            @if($permission->children->count())
+                @include('backend.auth.role.includes.children', ['children' => $permission->children])
+            @endif
         @endforeach
-    </ul>
+    </div>
+
+
 @endif
 
 @if (!$general->where('type', $type)->count() && !$categories->where('type', $type)->count())

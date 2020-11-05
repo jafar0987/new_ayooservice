@@ -2,6 +2,15 @@
 
 @section('title', __('Dashboard'))
 
+@section('page-header')
+    <!--Page header-->
+    <x-backend.page-header>
+        <x-slot name="title">Hi Welcome Back</x-slot>
+        <x-slot name="menu">Dashboard</x-slot>
+    </x-backend.page-header>
+    <!--End Page header-->
+@endsection
+
 @section('content')
     <x-backend.card>
         <x-slot name="header">
