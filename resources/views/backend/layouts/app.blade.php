@@ -22,10 +22,10 @@
         @include('backend.layouts.aside-menu')
         <div class="app-content main-content">
             <div class="side-app">
-                @include('backend.layouts..header')
+                @include('backend.layouts.header')
                 @yield('page-header')
                 @yield('content')
-                @include('backend.layouts..footer')
+                @include('backend.layouts.footer')
             </div>
 
         </div>

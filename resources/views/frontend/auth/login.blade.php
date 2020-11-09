@@ -3,68 +3,62 @@
 @section('title', __('Login'))
 
 @section('content')
-    <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <x-frontend.card>
-                    <x-slot name="header">
-                        @lang('Login')
-                    </x-slot>
-
-                    <x-slot name="body">
-                        <x-forms.post :action="route('frontend.auth.login')">
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">@lang('E-mail Address')</label>
-
-                                <div class="col-md-6">
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="{{ __('E-mail Address') }}" value="{{ old('email') }}" maxlength="255" required autofocus autocomplete="email" />
+    <div class="page">
+        <div class="page-single">
+            <div class="container">
+                <div class="row">
+                    <div class="col mx-auto">
+                        <div class="row justify-content-center">
+                            <div class="col-md-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <x-forms.post :action="route('frontend.auth.login')">
+                                        <div class="text-center title-style mb-6">
+                                            <h1 class="mb-2">Login</h1>
+                                            <hr>
+                                            <p class="text-muted">Sign In to your account</p>
+                                        </div>
+{{--                                        <div class="btn-list d-flex">--}}
+{{--                                            <a href="https://www.google.com/gmail/" class="btn btn-google btn-block"><i class="fa fa-google fa-1x mr-2"></i> Google</a>--}}
+{{--                                            <a href="https://twitter.com/" class="btn btn-twitter"><i class="fa fa-twitter fa-1x"></i></a>--}}
+{{--                                            <a href="https://www.facebook.com/" class="btn btn-facebook"><i class="fa fa-facebook fa-1x"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                        <hr class="divider my-6">--}}
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fe fe-user"></i>
+                                                </div>
+                                            </div>
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="{{ __('E-mail Address') }}" value="{{ old('email') }}" maxlength="255" required autofocus autocomplete="email" />
+                                        </div>
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fe fe-lock"></i>
+                                                </div>
+                                            </div>
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="current-password" />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn  btn-primary btn-block px-4">Login</button>
+                                            </div>
+                                            <div class="col-12 text-center">
+                                                <x-utils.link-fe :href="route('frontend.auth.password.request')" class="btn btn-link box-shadow-0 px-0" :text="__('Forgot Your Password?')"></x-utils.link-fe>
+                                            </div>
+                                        </div>
+                                        <div class="text-center pt-4">
+                                            <div class="font-weight-normal fs-16">You Don't have an account <a class="btn-link font-weight-normal" href="{{route('frontend.auth.register')}}">Register Here</a></div>
+                                        </div>
+                                        </x-forms.post>
+                                    </div>
                                 </div>
-                            </div><!--form-group-->
-
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">@lang('Password')</label>
-
-                                <div class="col-md-6">
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="current-password" />
-                                </div>
-                            </div><!--form-group-->
-
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input name="remember" id="remember" class="form-check-input" type="checkbox" {{ old('remember') ? 'checked' : '' }} />
-
-                                        <label class="form-check-label" for="remember">
-                                            @lang('Remember Me')
-                                        </label>
-                                    </div><!--form-check-->
-                                </div>
-                            </div><!--form-group-->
-
-                            @if(config('boilerplate.access.captcha.login'))
-                                <div class="row">
-                                    <div class="col">
-                                        @captcha
-                                        <input type="hidden" name="captcha_status" value="true" />
-                                    </div><!--col-->
-                                </div><!--row-->
-                            @endif
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button class="btn btn-primary" type="submit">@lang('Login')</button>
-
-                                    <x-utils.link-fe :href="route('frontend.auth.password.request')" class="btn btn-link" :text="__('Forgot Your Password?')"></x-utils.link-fe>
-                                </div>
-                            </div><!--form-group-->
-
-                            <div class="text-center">
-                                @include('frontend.auth.includes.social')
                             </div>
-                        </x-forms.post>
-                    </x-slot>
-                </x-frontend.card>
-            </div><!--col-md-8-->
-        </div><!--row-->
-    </div><!--container-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -1,42 +1,17 @@
-<!doctype html>
-<html lang="{{ htmlLang() }}" @langrtl dir="rtl" @endlangrtl>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ appName() }} | @yield('title')</title>
-    <meta name="description" content="@yield('meta_description', appName())">
-    <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
-    @yield('meta')
-
-    @stack('before-styles')
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="{{ mix('css/frontend.css') }}" rel="stylesheet">
-    <livewire:styles />
-    @stack('after-styles')
-
-    @include('includes.partials.ga')
+    <!-- Meta data -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta content="Admitro - Admin Panel HTML template" name="description">
+    <meta content="Spruko Technologies Private Limited" name="author">
+    <meta name="keywords"
+          content="admin panel ui, user dashboard template, web application templates, premium admin templates, html css admin templates, premium admin templates, best admin template bootstrap 4, dark admin template, bootstrap 4 template admin, responsive admin template, bootstrap panel template, bootstrap simple dashboard, html web app template, bootstrap report template, modern admin template, nice admin template"/>
+    @include('static.layouts.custom-head')
 </head>
-<body>
-    @include('includes.partials.read-only')
-    @include('includes.partials.logged-in-as')
-    @include('includes.partials.announcements')
-
-    <div id="app">
-        @include('frontend.includes.nav')
-        @include('includes.partials.messages')
-
-        <main>
-            @yield('content')
-        </main>
-    </div>
-
-    @stack('before-scripts')
-    <script src="{{ mix('js/manifest.js') }}"></script>
-    <script src="{{ mix('js/vendor.js') }}"></script>
-    <script src="{{ mix('js/frontend.js') }}"></script>
-    <livewire:scripts />
-    @stack('after-scripts')
+<body class="h-100vh page-style1">
+@yield('content')
+@include('static.layouts.custom-footer-scripts')
 </body>
 </html>
