@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\Package;
+use App\Domains\Profile\Models\Profile;
 
 /**
  * Class PackageRepository
  * @package App\Repositories
  * @version October 2, 2020, 6:28 pm UTC
  */
-class PackageRepository extends BaseRepository
+class ProfileRepository extends BaseRepository
 {
     /**
      * @var array
@@ -33,6 +33,6 @@ class PackageRepository extends BaseRepository
      **/
     public function model()
     {
-        return Package::class;
+        return Profile::class;
     }
 }
