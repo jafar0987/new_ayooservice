@@ -148,7 +148,7 @@ class FcmController extends BaseController
                 $this->sendMessage($request, $token);
             }
             catch (InvalidOptionsException $e) {
-                return $this->returnFalse($e);
+                return $this->returnFalse('failed',$e);
             }
         } else {
             return $this->returnFalse('FCM not found');

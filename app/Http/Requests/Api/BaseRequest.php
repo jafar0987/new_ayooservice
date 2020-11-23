@@ -25,11 +25,11 @@ class BaseRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors();
-        $data = [];
+        $data   = [];
         foreach ($errors->messages() as $item) {
             array_push($data, $item[0]);
         }
 
-        throw new HttpResponseException((new BaseController())->returnFalse($data));
+        throw new HttpResponseException((new BaseController())->returnFalse('failed', $data));
     }
 }

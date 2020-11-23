@@ -24,14 +24,15 @@ class BaseController extends Controller
     }
 
     /**
-     * @param $data
+     * @param string $message
+     * @param string $data
      * @return ResponseFactory|Response
      */
-    public function returnFalse($data = 'No Data Found')
+    public function returnFalse($message = 'failed' ,$data = 'No Data Found')
     {
         $response = [
             'status'  => false,
-            'message' => 'failed',
+            'message' => $message,
             'data'    => $data,
         ];
 
